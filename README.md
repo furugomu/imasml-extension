@@ -49,7 +49,7 @@ npm run build
 
 ```sh
 NODE_ENV=npm run build
-cp build
+cp imasml-extension.pem build
 (cd build && zip ../imasml-extension.zip *)
 ```
 
