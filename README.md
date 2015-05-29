@@ -49,8 +49,8 @@ npm run build
 
 ```sh
 NODE_ENV=production npm run build
-cp imasml-extension.pem build
-(cd build && zip ../imasml-extension.zip *)
+cp imasml-extension.pem build/key.pem
+(cd build && zip -r ../imasml-extension.zip *)
 ```
 
 https://chrome.google.com/webstore/developer/dashboard
