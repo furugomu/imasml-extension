@@ -48,7 +48,7 @@ npm run build
 ## 更新方法
 
 ```sh
-NODE_ENV=npm run build
+NODE_ENV=production npm run build
 cp imasml-extension.pem build
 (cd build && zip ../imasml-extension.zip *)
 ```
