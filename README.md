@@ -2,23 +2,11 @@
 
 https://chrome.google.com/webstore/detail/imasml-extension/lbkcmmeofdaijlkdhklbnoghdojpegld
 
-## ソースからインストールする方法
-
-1. [Node.js](nodejs.org) か [io.js](iojs.org) をインストールする。
-
-2. imas-extension のディレクトリで
-```
-% npm i
-% npm run build
-```
-
-3. build ディレクトリに生成物が置かれるので、chrome://extensions/ の「パッケージ化されていない拡張機能を読み込む…」ボタンで読み込む。
-
 ## 機能
 
 User-Agent を変更
 
-Ctrl か Enter を押すとアニメーションをスキップする
+Ctrl か Enter かミドルクリックでアニメーションをスキップする
 
 Esc を押すとダイアログを閉じる
 
@@ -26,7 +14,7 @@ Esc を押すとダイアログを閉じる
 
 デッキ編成の「上に移動」を高速化
 
-常に変なリンクを上に出す
+飴イベントの時、変なリンクを上に出す
 
 極道でスペシャルレッスンが出ると注意してくれる
 
@@ -45,3 +33,27 @@ Esc を押すとダイアログを閉じる
 現在のBPが0だったらダイアログを表示してあめいっこ選ぶ
 
 3を押したらBP3になるまで飴を押す
+
+### IMC で
+
+1-5 を押したらそのBPになるまで飴を押す
+
+## ビルド方法
+
+```sh
+npm i
+npm run build
+```
+
+## 更新方法
+
+```sh
+NODE_ENV=npm run build
+cp imasml-extension.pem build
+(cd build && zip ../imasml-extension.zip *)
+```
+
+https://chrome.google.com/webstore/developer/dashboard
+から
+https://chrome.google.com/webstore/developer/edit/lbkcmmeofdaijlkdhklbnoghdojpegld
+に行って imasml-extension.zip をアップロードする。
