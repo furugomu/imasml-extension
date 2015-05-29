@@ -6,20 +6,43 @@ unsafeCall(function() {
   if (typeof _root !== 'object') { return; }
   if (!_root.next_url) { return; }
 
-  let onkeydown = (e) => {
-    if (e.keyCode === 13 || e.ctrlKey) { go(); }
-  }
+  listen();
 
-  let onmousedown = (e) => {
-    if (e.button === 1) { go(); }
+  if (typeof loadRoot === 'function') {
+    window.loadRoot = (function(original) {
+      return function() {
+        original();
+        listen();
+      }
+    })(loadRoot);
   }
 
   function go() {
-    location.href = _root.next_url;
+    if (typeof redirectTo === 'function') {
+      redirectTo(_root.next_url);
+    }
+    else {
+      location.href = _root.next_url;
+    }
+    stopListening();
+  }
+
+  function listen() {
+    document.addEventListener('keydown', onkeydown, false);
+    document.addEventListener('mousedown', onmousedown, false);
+  }
+
+  function stopListening() {
     document.removeEventListener('keydown', onkeydown, false);
     document.removeEventListener('mousedown', onmousedown, false);
   }
 
-  document.addEventListener('keydown', onkeydown, false);
-  document.addEventListener('mousedown', onmousedown, false);
+  function onkeydown(e) {
+    if (e.keyCode === 13 || e.ctrlKey) { go(); }
+  }
+
+  function onmousedown(e) {
+    if (e.button === 1) { go(); }
+  }
+
 });

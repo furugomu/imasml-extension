@@ -39,18 +39,18 @@ unsafeCall(function() {
       text = '通常フェス開催';
       break;
     case 'bus_normal_c1_d4':
+    case 'bus_normal_c2_d4':
+    case 'bus_normal_c3_d4':
       // プライベートレッスン
       if (_root.next_url.indexOf('private_lesson') >= 0) {
         text = 'プライベートレッスン';
       }
+      else if (_root.next_url.indexOf('event_raid') >= 0) {
+        text = _root.dname + ' バースト';
+      }
       else {
         text = '5分2倍';
       }
-      break;
-    case 'bus_normal_c2_d4':
-    case 'bus_normal_c3_d4':
-      // コミュ？
-      text = _root.dtalk.replace('\n', '');
       break;
     case "bus_normal_c1_d7":
       text = 'ハート増加'; // 通常営業？
