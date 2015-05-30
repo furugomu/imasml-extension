@@ -18,6 +18,8 @@
   
   let formTitle = closestHeadingByClassName(form, "heading cap-03");
 
+  if(firstHeading.isEqualNode(formTitle)) return;
+
   for(let i = 0, e = formTitle; i < 4; ++i){
     let t = e;
     e = e.nextElementSibling;
