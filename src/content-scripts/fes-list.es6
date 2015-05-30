@@ -52,4 +52,6 @@
       button.innerHTML += ' '+accesskey;
     }
   }
+
+  window.scrollTo(0, 200);
 })();
