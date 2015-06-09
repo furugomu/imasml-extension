@@ -18,11 +18,12 @@
     itemButton(form).click();
   }
 
-  // 3を押したらBP3になるまで飴を押す
+  // 2か3を押したらBPがその値になるまで飴を押す
   let submitButton = form.querySelector('[type=submit]');
   document.addEventListener('keypress', (e) => {
-    if (e.keyCode !== 0x33) { return; } // 3
-    for (let i = Number(form.bp.value); i < 3; ++i) {
+    let n = e.keyCode - 0x30;
+    if (n < 2 || 3 < n) { return; } // n ∈ [2..3]
+    for (let i = Number(form.bp.value); i < n; ++i) {
       itemButton().click();
     }
     submitButton.focus();

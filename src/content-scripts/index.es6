@@ -13,3 +13,5 @@ import './next-url';
 import './sp-lesson';
 import './title';
 import './tsuginofesukekka';
+import './lottery-rendability';
+import './exp-scouter';
