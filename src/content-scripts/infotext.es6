@@ -9,8 +9,11 @@ unsafeCall(function() {
     case "bus_normal_c0_d0":
       // なにもおきない
       let n = Number;
-      if (n(_root.prog) + n(_root.ploop) * n(_root.prog_gain) === n(_root.prog_max)) {
+      if (n(_root.prog) + n(_root.ploop) * n(_root.prog_gain) >= n(_root.prog_max)) {
         text = 'エリア終了';
+      }
+      else if (n(_root.exp) + (_root.ploop) * n(_root.exp_gain) >= n(_root.exp_max)) {
+        text = 'レベルアップ';
       }
       else {
         text = '元気切れ';
@@ -19,10 +22,6 @@ unsafeCall(function() {
     case "bus_normal_c0_d1":
       // カード獲得
       text = _root.text.replace("\n", '');
-      break;
-    case "bus_normal_c0_d1":
-      // コミュでバースト
-      text = _root.dtalk.replace('\n', '');
       break;
     case 'bus_normal_c5_d2':
       // 強いフェス (イベントフェス？)
@@ -52,11 +51,26 @@ unsafeCall(function() {
         text = '5分2倍';
       }
       break;
+    case 'bus_normal_c1_d5':
+      // チョコイベント
+      if (_root.next_url.indexOf('marathon') >= 0) {
+        text = 'アイドルフィーチャリング';
+      }
+      else {
+        text = '5分2倍';
+      }
+      break;
+    case 'bus_normal_c1_d6':
+      text = 'スパークチャンス';
+      break;
     case "bus_normal_c1_d7":
       text = 'ハート増加'; // 通常営業？
       break;
     case "bus_normal_c2_d7":
       text = 'ハート増加'; // イベント営業？
+      break;
+    case "bus_normal_c1_d8":
+      text = _root.point_gain + '点入手';
       break;
     default:
       if (method.indexOf("bus_normal") >= 0) {
