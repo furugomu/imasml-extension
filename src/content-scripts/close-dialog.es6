@@ -9,6 +9,5 @@ document.addEventListener('keydown', (e) => {
   let button = document.querySelector(selector);
   if (button) {
     button.click();
-    e.preventDefault();
   }
 }, false);
