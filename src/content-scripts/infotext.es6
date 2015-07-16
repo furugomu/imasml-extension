@@ -104,6 +104,7 @@ unsafeCall(function() {
   let timer = setInterval(() => {
     if (typeof exportRoot !== 'object') { return; }
     if (typeof exportRoot.main_mc !== 'object') { return; }
+    if (typeof exportRoot.main_mc.infomation_mc !== 'object') { return; }
     clearInterval(timer);
     setinfotext();
   }, 100);
