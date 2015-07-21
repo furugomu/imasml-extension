@@ -6,7 +6,6 @@ import './event-fes-menu';
 import './focus-to-primary-button';
 import './fes-list';
 import './focus-to-primary-button';
-import './imc';
 import './in-place-deck-edit';
 import './infotext';
 import './next-url';

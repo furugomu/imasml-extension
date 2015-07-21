@@ -1,7 +1,9 @@
-// 自動であめいっこ選ぶ
+import selectVisible from './lib/select-visible';
+import onload from './lib/onload';
 
-(function main() {
-  let form = document.querySelector('form[action$="/battle/"]');
+// 自動であめいっこ選ぶ
+onload(() => {
+  let form = document.getElementById('send-attack');
   if (!form) { return; }
 
   function itemButton() {
@@ -13,19 +15,38 @@
   if (form.querySelector('.bp-button-0')) { return; }
 
   // 現在のBPが0だったらダイアログを表示してあめいっこ選ぶ
-  if (form.bp.value === '0') {
+  if (form.max_bp.value === '0') {
     document.getElementById('fit-win').style.display = 'block';
-    itemButton(form).click();
+    eatCandy(form);
   }
+});
 
-  // 2か3を押したらBPがその値になるまで飴を押す
-  let submitButton = form.querySelector('[type=submit]');
-  document.addEventListener('keypress', (e) => {
-    let n = e.keyCode - 0x30;
-    if (n < 2 || 3 < n) { return; } // n ∈ [2..3]
-    for (let i = Number(form.bp.value); i < n; ++i) {
-      itemButton().click();
-    }
-    submitButton.focus();
-  }, false);
-})();
+// 1-5 を押したとき
+document.addEventListener('keypress', (e) => {
+  let form = document.getElementById('send-attack');
+  if (!form) return;
+
+  // ダイアログを見えるようにする
+  document.getElementById('fit-win').style.display = 'block';
+
+  // BP が押した数字になるまで飴を押す
+  let n = e.keyCode - 0x30; // 0-9
+  let button = form.querySelector(`.bp-button [data-value="${n}"]`); // BP 0-5 のボタン
+  if (!button) return;
+  for (let i = Number(form.max_bp.value); i < n; ++i) {
+    eatCandy(form);
+  }
+  button.click();
+  let submitButton = selectVisible('[type=submit]', form);
+  submitButton.focus();
+
+}, false);
+
+// 右端の飴を押す
+function eatCandy(form) {
+  let buttons = form.querySelectorAll('.item-panel [data-is-usable="1"].choice');
+  let button = buttons[buttons.length - 1];
+  if (button) {
+    button.click();
+  }
+}

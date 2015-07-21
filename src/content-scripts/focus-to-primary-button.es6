@@ -1,4 +1,5 @@
 import selectVisible from './lib/select-visible';
+import onload from './lib/onload';
 
 function focus() {
   var selector = [
@@ -15,7 +16,7 @@ function focus() {
   }, 0);
 }
 
-(function main () {
+onload(() => {
   focus();
 
   // esc を押したらダイアログを閉じるはずなので見えているボタンにフォーカスを移す
@@ -31,4 +32,4 @@ function focus() {
     if (e) { e.focus(); }
   }
   */
-})();
+});
