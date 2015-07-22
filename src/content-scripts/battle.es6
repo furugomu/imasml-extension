@@ -12,7 +12,7 @@ onload(() => {
   }
 
   // BP0ボタンがあったらやめる
-  if (form.querySelector('.bp-button-0')) { return; }
+  if (form.querySelector('.bp-button [data-value="0"]')) { return; }
 
   // 現在のBPが0だったらダイアログを表示してあめいっこ選ぶ
   if (form.max_bp.value === '0') {
@@ -26,17 +26,20 @@ document.addEventListener('keypress', (e) => {
   let form = document.getElementById('send-attack');
   if (!form) return;
 
+  // ボタンある？
+  let n = e.keyCode - 0x30; // 0-9
+  let button = form.querySelector(`.bp-button [data-value="${n}"]`); // BP 0-5 のボタン
+  if (!button) return;
+
   // ダイアログを見えるようにする
   document.getElementById('fit-win').style.display = 'block';
 
   // BP が押した数字になるまで飴を押す
-  let n = e.keyCode - 0x30; // 0-9
-  let button = form.querySelector(`.bp-button [data-value="${n}"]`); // BP 0-5 のボタン
-  if (!button) return;
   for (let i = Number(form.max_bp.value); i < n; ++i) {
     eatCandy(form);
   }
   button.click();
+
   let submitButton = selectVisible('[type=submit]', form);
   submitButton.focus();
 
